@@ -50,7 +50,7 @@ export default {
   async fetch() {
     // http://localhost:8888/api/getSections
     const res = await fetch(
-      `https://nuxt-ecommerce-template.netlify.app/api/getSections`
+      `https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getSections`
     );
     const data = await res.json();
     this.sections = data;

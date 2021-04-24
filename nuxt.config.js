@@ -40,10 +40,12 @@ export default {
     includeNodeModules: true, // optional, default: false (this includes graphql-tag for node_modules folder)
     clientConfigs: {
       default: {
-        httpEndpoint: "http://localhost:8888/api/getPost"
+        httpEndpoint:
+          "https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getPost"
       },
       getPosts: {
-        httpEndpoint: "http://localhost:8888/api/getPosts"
+        httpEndpoint:
+          "https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getPosts"
       }
     }
   },

@@ -39,7 +39,7 @@ export default {
   async fetch() {
     // http://localhost:8888/api/getProducts
     const res = await fetch(
-      `https://nuxt-ecommerce-template.netlify.app/api/getProducts`
+      `https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getProducts`
     );
     const data = await res.json();
     this.products = data;
