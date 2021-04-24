@@ -2,7 +2,7 @@
   <div class="navbar">
     <div class="logo-div">
       <nuxt-link to="/" class="logo-img">
-        <span>My logo</span>
+        <span id="shop-title">Nuxt e-Commerce</span>
       </nuxt-link>
     </div>
     <div class="links">
@@ -33,5 +33,11 @@ export default {
 
 .links a {
   margin-left: 40px;
+}
+
+#shop-title {
+  font-size: 1.2rem;
+  border: solid 1px black;
+  padding: 10px;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <footer>
     <span
-      >Almir Marques 2021 © Ecommerce Template (Nuxt.js + Amplience +
-      Commercetools + Apollo)</span
+      >e-Commerce Template (Nuxt.js + Amplience + Commercetools + Apollo +
+      Netlify Functions)</span
     >
   </footer>
 </template>
