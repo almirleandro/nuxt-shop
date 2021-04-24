@@ -52,14 +52,20 @@ export default {
     async routes() {
       // let arrayOfRoutes = [];
 
-      const firstRes = await axios.get(
-        "https://nuxt-ecommerce-template.netlify.app/api/getSections"
-      );
-      const firstRoute = firstRes.data.map(section => {
-        return "/shop/" + section.title;
-      });
+      // const firstRes = await axios.get(
+      //   "https://nuxt-ecommerce-template.netlify.app/api/getSections"
+      // );
+      // const firstRoute = firstRes.data.map(section => {
+      //   return "/shop/" + section.title;
+      // });
 
-      return firstRoute;
+      return [
+        "/shop/hats",
+        "/shop/jackets",
+        "/shop/sneakers",
+        "/shop/womens",
+        "/shop/mens"
+      ];
 
       // const secondRes = await axios.get("http://localhost:8888/api/getSections");
       // const secondRoute = secondRes.data.map(section => {
