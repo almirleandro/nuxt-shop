@@ -119,7 +119,7 @@ export default {
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append(
         "Authorization",
-        "Bearer 8AkBBBgLvhm5p_c9B9SJOo6n8oWPo0hE"
+        "Bearer SWHDMAwc-LUAOA375Dq3Jv94_RkDhV0O"
       );
 
       var raw = JSON.stringify(toSend);
@@ -145,7 +145,7 @@ export default {
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append(
         "Authorization",
-        "Bearer 8AkBBBgLvhm5p_c9B9SJOo6n8oWPo0hE"
+        "Bearer SWHDMAwc-LUAOA375Dq3Jv94_RkDhV0O"
       );
 
       var raw = JSON.stringify({
