@@ -22,6 +22,7 @@ import gql from "graphql-tag";
 
 export default {
   name: "BlogHomepage",
+  transition: "default",
   apollo: {
     $client: "getPosts",
     allPosts: {
@@ -80,6 +81,15 @@ export default {
 }
 .blog-enter,
 .blog-leave-active {
+  opacity: 0;
+}
+
+.default-enter-active,
+.default-leave-active {
+  transition: opacity 0.5s;
+}
+.default-enter,
+.default-leave-active {
   opacity: 0;
 }
 </style>

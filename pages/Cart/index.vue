@@ -44,6 +44,7 @@
 <script>
 export default {
   name: "CartPage",
+  transition: "default",
   data() {
     return {
       cart: this.$store.state.cart
@@ -161,5 +162,14 @@ export default {
   align-self: flex-end;
   width: fit-content;
   height: fit-content;
+}
+
+.default-enter-active,
+.default-leave-active {
+  transition: opacity 0.5s;
+}
+.default-enter,
+.default-leave-active {
+  opacity: 0;
 }
 </style>

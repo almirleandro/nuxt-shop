@@ -46,6 +46,7 @@
 <script>
 export default {
   name: "Homepage",
+  transition: "default",
   data() {
     return {
       sections: []
@@ -142,5 +143,14 @@ export default {
 .section-title-div:hover {
   background-color: rgba(0, 0, 0, 0.815);
   color: rgba(255, 255, 255, 0.842);
+}
+
+.default-enter-active,
+.default-leave-active {
+  transition: opacity 0.5s;
+}
+.default-enter,
+.default-leave-active {
+  opacity: 0;
 }
 </style>

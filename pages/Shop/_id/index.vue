@@ -18,6 +18,7 @@
 <script>
 export default {
   name: "ShopSection",
+  transition: "default",
   data() {
     return {
       products: {},
@@ -113,5 +114,14 @@ export default {
   font-size: 1.3rem;
   position: absolute;
   text-align: right;
+}
+
+.default-enter-active,
+.default-leave-active {
+  transition: opacity 0.5s;
+}
+.default-enter,
+.default-leave-active {
+  opacity: 0;
 }
 </style>

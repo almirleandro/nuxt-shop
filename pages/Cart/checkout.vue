@@ -48,6 +48,7 @@
 <script>
 export default {
   name: "CheckoutPage",
+  transition: "default",
   data() {
     return {
       cart: this.$store.state.cart,
@@ -140,7 +141,6 @@ export default {
         .catch(error => console.log("error", error));
     },
     placeOrder(cart) {
-      console.log(cart);
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append(
@@ -228,5 +228,14 @@ export default {
 .order-btn:hover {
   background-color: black;
   color: white;
+}
+
+.default-enter-active,
+.default-leave-active {
+  transition: opacity 0.5s;
+}
+.default-enter,
+.default-leave-active {
+  opacity: 0;
 }
 </style>
