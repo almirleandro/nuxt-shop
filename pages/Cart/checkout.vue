@@ -167,10 +167,7 @@ export default {
       fetch(
         "https://api.us-central1.gcp.commercetools.com/nuxt-products/orders",
         requestOptions
-      )
-        .then(json => json.json())
-        .then(response => console.log(response))
-        .catch(error => console.log("error", error));
+      ).catch(error => console.log("error", error));
     }
   }
 };
