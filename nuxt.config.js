@@ -41,10 +41,14 @@ export default {
     clientConfigs: {
       default: {
         httpEndpoint:
+          // http://localhost:8888/api/getPost
+          // https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getPost
           "https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getPost"
       },
       getPosts: {
         httpEndpoint:
+          // http://localhost:8888/api/getPosts
+          // https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getPosts
           "https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getPosts"
       }
     }

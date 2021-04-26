@@ -8,13 +8,15 @@
           :key="section.id"
           v-if="section.id < 4"
         >
-          <img
-            :src="section.imageUrl"
-            :alt="section.title"
-            v-if="section.id < 4"
-          />
-          <div class="section-title-div">
-            {{ section.name }}
+          <div class="image-block-div">
+            <img
+              :src="section.imageUrl"
+              :alt="section.title"
+              v-if="section.id < 4"
+            />
+            <div class="section-title-div">
+              {{ section.name }}
+            </div>
           </div>
         </nuxt-link>
       </div>
@@ -25,13 +27,15 @@
           :key="section.id"
           v-if="section.id >= 4"
         >
-          <img
-            :src="section.imageUrl"
-            :alt="section.title"
-            v-if="section.id >= 4"
-          />
-          <div class="section-title-div">
-            {{ section.name }}
+          <div class="image-block-div">
+            <img
+              :src="section.imageUrl"
+              :alt="section.title"
+              v-if="section.id >= 4"
+            />
+            <div class="section-title-div">
+              {{ section.name }}
+            </div>
           </div>
         </nuxt-link>
       </div>
@@ -49,6 +53,7 @@ export default {
   },
   async fetch() {
     // http://localhost:8888/api/getSections
+    // https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getSections
     const res = await fetch(
       `https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getSections`
     );
@@ -88,8 +93,25 @@ export default {
 
 .first-row a,
 .second-row a {
+  display: block;
+  width: fit-content;
+  margin-bottom: 5px;
+  text-decoration: none;
+  color: black;
+  font-size: 1.8rem;
   min-width: 100%;
   height: 100%;
+  overflow: hidden;
+}
+
+.image-block-div {
+  min-width: 100%;
+  height: 100%;
+  transition: transform 0.5s; /* Animation */
+}
+
+.image-block-div:hover {
+  transform: scale(1.05);
 }
 
 .first-row a img,
@@ -97,15 +119,6 @@ export default {
   object-fit: cover;
   width: 100%;
   height: 100%;
-}
-
-.home-sections a {
-  display: block;
-  width: fit-content;
-  margin-bottom: 5px;
-  text-decoration: none;
-  color: black;
-  font-size: 1.8rem;
 }
 
 .section-title-div {
@@ -123,5 +136,11 @@ export default {
   font-size: 1.2rem;
   font-weight: 700;
   cursor: pointer;
+  transition: 0.5s; /* Animation */
+}
+
+.section-title-div:hover {
+  background-color: rgba(0, 0, 0, 0.815);
+  color: rgba(255, 255, 255, 0.842);
 }
 </style>

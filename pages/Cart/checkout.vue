@@ -222,6 +222,7 @@ export default {
   align-self: flex-end;
   width: fit-content;
   height: fit-content;
+  transition: 0.5s; /* Animation */
 }
 
 .order-btn:hover {

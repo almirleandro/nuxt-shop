@@ -149,6 +149,7 @@ export default {
   outline: none;
   border: 1px solid black;
   cursor: pointer;
+  transition: 0.5s; /* Animation */
 }
 
 .checkout-btn:hover {

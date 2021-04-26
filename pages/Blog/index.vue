@@ -1,17 +1,19 @@
 <template>
   <div class="blog-home-container">
-    <div class="blog-homepage" v-if="canLoad">
-      <h1>Blog Page</h1>
-      <div
-        class="blog-title-div"
-        v-for="post in allPosts"
-        :key="post.blogPost.postId"
-      >
-        <nuxt-link :to="'/blog/' + post.blogPost.postId">
-          <span class="blog-title">{{ post.blogPost.title }}</span>
-        </nuxt-link>
+    <transition name="blog">
+      <div class="blog-homepage" v-if="canLoad">
+        <h1>Blog</h1>
+        <div
+          class="blog-title-div"
+          v-for="post in allPosts"
+          :key="post.blogPost.postId"
+        >
+          <nuxt-link :to="'/blog/' + post.blogPost.postId">
+            <span class="blog-title">{{ post.blogPost.title }}</span>
+          </nuxt-link>
+        </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -55,6 +57,7 @@ export default {
 
 .blog-homepage {
   width: 680px;
+  transition: 0.5s; /* Animation */
 }
 
 .blog-homepage h1 {
@@ -69,5 +72,14 @@ export default {
   text-decoration: none;
   font-size: 1.3rem;
   color: #0070f3;
+}
+
+.blog-enter-active,
+.blog-leave-active {
+  transition: opacity 0.5s;
+}
+.blog-enter,
+.blog-leave-active {
+  opacity: 0;
 }
 </style>

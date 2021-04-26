@@ -38,6 +38,7 @@ export default {
   },
   async fetch() {
     // http://localhost:8888/api/getProducts
+    // https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getProducts
     const res = await fetch(
       `https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getProducts`
     );
@@ -55,6 +56,7 @@ export default {
 }
 
 #section-title {
+  cursor: default;
   display: block;
   text-align: center;
   font-size: 2rem;
@@ -69,14 +71,25 @@ export default {
   grid-gap: 20px;
 }
 
-.products-div img {
+.product-wrapper {
+  overflow: hidden;
+}
+
+.product-wrapper img {
   object-fit: cover;
   width: 100%;
   height: 85%;
+  transition: transform 0.5s; /* Animation */
+  transform-origin: bottom;
+}
+
+.product-wrapper:hover img {
+  transform: scale(1.05);
 }
 
 .add-cart-btn {
-  background-color: rgb(238, 238, 238);
+  background-color: white;
+  border: 1px solid rgb(207, 207, 207);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -84,10 +97,12 @@ export default {
   margin-top: -5px;
   font-size: 1.2rem;
   cursor: pointer;
+  transition: 0.5s; /* Animation */
 }
 
 .add-cart-btn:hover {
-  background-color: rgb(219, 219, 219);
+  background-color: rgba(0, 0, 0, 0.815);
+  color: white;
 }
 
 .price-img {
