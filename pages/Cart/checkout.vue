@@ -119,19 +119,25 @@ export default {
         }
       };
 
-      const res = await fetch(`http://localhost:8888/api/createCart`, {
-        method: "POST",
-        body: JSON.stringify(toSend)
-      });
+      const res = await fetch(
+        `https://nuxt-ecommerce-template.netlify.app/.netlify/functions/createCart`,
+        {
+          method: "POST",
+          body: JSON.stringify(toSend)
+        }
+      );
       const data = await res.json();
       this.placeOrder(data);
     },
 
     async placeOrder(cart) {
-      const res = await fetch(`http://localhost:8888/api/placeOrder`, {
-        method: "POST",
-        body: JSON.stringify(cart)
-      });
+      const res = await fetch(
+        `https://nuxt-ecommerce-template.netlify.app/.netlify/functions/placeOrder`,
+        {
+          method: "POST",
+          body: JSON.stringify(cart)
+        }
+      );
       const data = await res.json();
     }
   }
