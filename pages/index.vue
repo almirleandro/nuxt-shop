@@ -1,45 +1,45 @@
 <template>
   <div class="container">
-    <div class="home-sections">
-      <div class="first-row">
-        <nuxt-link
-          v-for="section in sections"
-          :to="'/shop/' + section.title"
-          :key="section.id"
-          v-if="section.id < 4"
-        >
-          <div class="image-block-div">
-            <img
-              :src="section.imageUrl"
-              :alt="section.title"
-              v-if="section.id < 4"
-            />
-            <div class="section-title-div">
-              {{ section.name }}
+    <transition name="default">
+      <div class="home-sections" v-if="canLoad">
+        <div class="first-row">
+          <nuxt-link
+            v-for="section in sections"
+            :to="'/shop/' + section.description"
+            :key="section.id"
+            v-if="isUpperRow(section.description)"
+          >
+            <div class="image-block-div">
+              <img
+                :src="section.attributes[0].inputTip.en"
+                :alt="section.description"
+              />
+              <div class="section-title-div">
+                {{ section.name }}
+              </div>
             </div>
-          </div>
-        </nuxt-link>
-      </div>
-      <div class="second-row">
-        <nuxt-link
-          v-for="section in sections"
-          :to="'/shop/' + section.title"
-          :key="section.id"
-          v-if="section.id >= 4"
-        >
-          <div class="image-block-div">
-            <img
-              :src="section.imageUrl"
-              :alt="section.title"
-              v-if="section.id >= 4"
-            />
-            <div class="section-title-div">
-              {{ section.name }}
+          </nuxt-link>
+        </div>
+        <div class="second-row">
+          <nuxt-link
+            v-for="section in sections"
+            :to="'/shop/' + section.description"
+            :key="section.id"
+            v-if="isBottomRow(section.description)"
+          >
+            <div class="image-block-div">
+              <img
+                :src="section.attributes[0].inputTip.en"
+                :alt="section.title"
+              />
+              <div class="section-title-div">
+                {{ section.name }}
+              </div>
             </div>
-          </div>
-        </nuxt-link>
+          </nuxt-link>
+        </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -52,9 +52,25 @@ export default {
       sections: []
     };
   },
+  computed: {
+    canLoad() {
+      if (!this.sections?.length) return false;
+      return true;
+    }
+  },
+  methods: {
+    isUpperRow(item) {
+      const bool = item !== "womens" && item !== "mens";
+      return bool;
+    },
+    isBottomRow(item) {
+      const bool = item === "womens" || item === "mens";
+      return bool;
+    }
+  },
   async fetch() {
-    // http://localhost:8888/api/getSections
-    // https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getSections
+    // Development: http://localhost:8888/api/getSections
+    // Production: https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getSections
     const res = await fetch(
       `https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getSections`
     );

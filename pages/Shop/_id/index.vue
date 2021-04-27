@@ -1,17 +1,19 @@
 <template>
-  <div class="section" v-if="products.hats">
-    <span id="section-title">{{ products[$route.params.id].title }}</span>
-    <div class="products-div">
-      <div
-        class="product-wrapper"
-        v-for="item in products[$route.params.id].items"
-      >
-        <img :src="item.imageUrl" :alt="item.name" />
-        <div class="add-cart-btn" @click.prevent="addToCart(item)">
-          (${{ item.price }}) Add to Cart
+  <div class="section-wrapper">
+    <transition name="default">
+      <div class="section" v-if="loadPage">
+        <span id="section-title">{{ section }}</span>
+        <div class="products-div">
+          <div class="product-wrapper" v-for="item in products">
+            <img :src="item.masterVariant.images[0].url" :alt="item.name.en" />
+            <div class="add-cart-btn" @click.prevent="addToCart(item)">
+              (${{ item.masterVariant.prices[0].value.centAmount / 100 }}) Add
+              to Cart
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -21,13 +23,19 @@ export default {
   transition: "default",
   data() {
     return {
-      products: {},
-      state: this.$store.state.cart
+      products: [],
+      state: this.$store.state.cart,
+      section: ""
     };
+  },
+  computed: {
+    loadPage() {
+      return this.products?.length;
+    }
   },
   methods: {
     addToCart(item) {
-      const key = item.name.split(" ").join("");
+      const key = item.name.en.split(" ").join("");
       const itemObj = this.$store.state.cart[key];
 
       if (itemObj) {
@@ -38,18 +46,48 @@ export default {
     }
   },
   async fetch() {
-    // http://localhost:8888/api/getProducts
-    // https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getProducts
+    let route = "";
+    switch (this.$route.params.id) {
+      case "jackets":
+        route = "1503b845-3b2d-4469-aea3-2c8a4a54ec82";
+        break;
+      case "hats":
+        route = "ffcc633b-0e55-4577-8a43-015f224debc8";
+        break;
+      case "sneakers":
+        route = "25899254-051d-4372-acb1-25b7afd0f3be";
+        break;
+      case "womens":
+        route = "e82cf5a0-5583-4c1d-a6a0-f3e39bf2c364";
+        break;
+      case "mens":
+        route = "9f69d878-e50a-4eb1-aebf-6bd9f8b4d166";
+        break;
+    }
+
+    // Development: http://localhost:8888/api/getProducts
+    // Production: https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getProducts
     const res = await fetch(
-      `https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getProducts`
+      `https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getProducts`,
+      {
+        method: "POST",
+        body: route
+      }
     );
     const data = await res.json();
     this.products = data;
+    this.section =
+      this.$route.params.id.charAt(0).toUpperCase() +
+      this.$route.params.id.slice(1);
   }
 };
 </script>
 
 <style>
+.section-wrapper {
+  min-height: 90vh;
+}
+
 .section {
   padding: 0 70px;
   margin-bottom: 20px;

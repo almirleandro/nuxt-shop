@@ -1,6 +1,6 @@
 <template>
   <div class="blog-home-container">
-    <transition name="blog">
+    <transition name="default">
       <div class="blog-homepage" v-if="canLoad">
         <h1>Blog</h1>
         <div
@@ -73,15 +73,6 @@ export default {
   text-decoration: none;
   font-size: 1.3rem;
   color: #0070f3;
-}
-
-.blog-enter-active,
-.blog-leave-active {
-  transition: opacity 0.5s;
-}
-.blog-enter,
-.blog-leave-active {
-  opacity: 0;
 }
 
 .default-enter-active,

@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: "static",
@@ -28,7 +26,7 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [],
+  buildModules: ["@nuxtjs/dotenv"],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["@nuxtjs/apollo"],
@@ -41,43 +39,32 @@ export default {
     clientConfigs: {
       default: {
         httpEndpoint:
-          // http://localhost:8888/api/getPost
-          // https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getPost
-          "https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getPost"
+          // Development: http://localhost:8888/api/getPost
+          // Production: https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getPost
+          "http://localhost:8888/api/getPost"
       },
       getPosts: {
         httpEndpoint:
-          // http://localhost:8888/api/getPosts
-          // https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getPosts
-          "https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getPosts"
+          // Development: http://localhost:8888/api/getPosts
+          // Production: https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getPosts
+          "http://localhost:8888/api/getPosts"
       }
     }
   },
 
   generate: {
     async routes() {
-      // let arrayOfRoutes = [];
-
-      // const firstRes = await axios.get(
-      //   "https://nuxt-ecommerce-template.netlify.app/api/getSections"
-      // );
-      // const firstRoute = firstRes.data.map(section => {
-      //   return "/shop/" + section.title;
-      // });
-
       return [
         "/shop/hats",
         "/shop/jackets",
         "/shop/sneakers",
         "/shop/womens",
-        "/shop/mens"
+        "/shop/mens",
+        "/blog/6f2f596a-3a62-4529-ac94-7182cf35620c",
+        "/blog/ef52a252-3331-469d-a608-0d6dcc288964",
+        "/blog/6b880c0f-c3e2-4c14-a8bd-f22b61630992",
+        "/blog/b89856bc-b173-4dba-ae61-e7b3311ad079"
       ];
-
-      // const secondRes = await axios.get("http://localhost:8888/api/getSections");
-      // const secondRoute = secondRes.data.map(section => {
-      //   return "/shop/" + section.title;
-      // });
-      // arrayOfRoutes.push(secondRoute);
     }
   }
 };

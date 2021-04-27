@@ -1,6 +1,6 @@
 <template>
   <div class="post-container">
-    <transition name="blog-post">
+    <transition name="default">
       <div class="post" v-if="post">
         <h1>{{ post.title }}</h1>
         <span class="post-author">Author: {{ post.author }}</span>
@@ -72,15 +72,6 @@ export default {
   margin-bottom: 30px;
   text-align: justify;
   line-height: 28px;
-}
-
-.blog-post-enter-active,
-.blog-post-leave-active {
-  transition: opacity 0.5s;
-}
-.blog-post-enter,
-.blog-post-leave-active {
-  opacity: 0;
 }
 
 .default-enter-active,

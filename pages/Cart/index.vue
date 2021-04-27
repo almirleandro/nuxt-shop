@@ -10,9 +10,9 @@
       <div class="content-rows">
         <div class="item-content" v-for="item in cart" v-if="item.quantity">
           <div class="item-img">
-            <img :src="item.imageUrl" :key="item.name" />
+            <img :src="item.masterVariant.images[0].url" :key="item.name.en" />
           </div>
-          <span>{{ item.name }}</span>
+          <span>{{ item.name.en }}</span>
           <div class="quantity-div">
             <button
               class="quantity-btn"
@@ -28,7 +28,14 @@
               >
             </button>
           </div>
-          <span>${{ rightPrice(item.price, item.quantity) }}</span>
+          <span
+            >${{
+              rightPrice(
+                item.masterVariant.prices[0].value.centAmount / 100,
+                item.quantity
+              )
+            }}</span
+          >
         </div>
       </div>
       <span class="total-price">Total: ${{ total }}</span>
@@ -52,11 +59,11 @@ export default {
   },
   methods: {
     increaseQuantity(item) {
-      const key = item.name.split(" ").join("");
+      const key = item.name.en.split(" ").join("");
       this.$store.commit("increment", key);
     },
     decreaseQuantity(item) {
-      const key = item.name.split(" ").join("");
+      const key = item.name.en.split(" ").join("");
       this.$store.commit("decrement", key);
     },
     rightPrice(originalPrice, quantity) {
@@ -68,7 +75,10 @@ export default {
       let number = 0;
       for (let item in this.cart) {
         if (this.cart[item].quantity) {
-          const mul = this.cart[item].quantity * this.cart[item].price;
+          const mul =
+            (this.cart[item].quantity *
+              this.cart[item].masterVariant.prices[0].value.centAmount) /
+            100;
           number += mul;
         }
       }

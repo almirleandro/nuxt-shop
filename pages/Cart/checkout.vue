@@ -68,8 +68,10 @@ export default {
       for (let item in this.$store.state.cart) {
         if (this.$store.state.cart[item].quantity) {
           const mul =
-            this.$store.state.cart[item].quantity *
-            this.$store.state.cart[item].price;
+            (this.$store.state.cart[item].quantity *
+              this.$store.state.cart[item].masterVariant.prices[0].value
+                .centAmount) /
+            100;
           number += mul;
         }
       }
@@ -84,13 +86,14 @@ export default {
         if (this.cart[item].quantity) {
           const lineObject = {
             quantity: this.cart[item].quantity,
-            slug: this.cart[item].name.split(" ").join(""),
+            slug: this.cart[item].name.en.split(" ").join(""),
             name: {
-              en: this.cart[item].name
+              en: this.cart[item].name.en
             },
             money: {
               currencyCode: "USD",
-              centAmount: this.cart[item].price * 100
+              centAmount: this.cart[item].masterVariant.prices[0].value
+                .centAmount
             },
             taxCategory: {
               id: "a91a4501-ff7c-4eb9-a1f4-4da70c7c7b0a"
@@ -118,10 +121,7 @@ export default {
 
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-      myHeaders.append(
-        "Authorization",
-        "Bearer SWHDMAwc-LUAOA375Dq3Jv94_RkDhV0O"
-      );
+      myHeaders.append("Authorization", process.env.COMMERCETOOLS_API_TOKEN);
 
       var raw = JSON.stringify(toSend);
 
@@ -143,10 +143,7 @@ export default {
     placeOrder(cart) {
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-      myHeaders.append(
-        "Authorization",
-        "Bearer SWHDMAwc-LUAOA375Dq3Jv94_RkDhV0O"
-      );
+      myHeaders.append("Authorization", process.env.COMMERCETOOLS_API_TOKEN);
 
       var raw = JSON.stringify({
         version: 1,
