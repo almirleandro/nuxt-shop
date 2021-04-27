@@ -79,7 +79,7 @@ export default {
     }
   },
   methods: {
-    handleSubmit() {
+    async handleSubmit() {
       let customLineItems = [];
 
       for (let item in this.cart) {
@@ -119,52 +119,20 @@ export default {
         }
       };
 
-      var myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
-      myHeaders.append("Authorization", process.env.COMMERCETOOLS_API_TOKEN);
-
-      var raw = JSON.stringify(toSend);
-
-      var requestOptions = {
+      const res = await fetch(`http://localhost:8888/api/createCart`, {
         method: "POST",
-        headers: myHeaders,
-        body: raw,
-        redirect: "follow"
-      };
-
-      fetch(
-        "https://api.us-central1.gcp.commercetools.com/nuxt-products/carts",
-        requestOptions
-      )
-        .then(response => response.json())
-        .then(result => this.placeOrder(result))
-        .catch(error => console.log("error", error));
-    },
-    placeOrder(cart) {
-      var myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
-      myHeaders.append("Authorization", process.env.COMMERCETOOLS_API_TOKEN);
-
-      var raw = JSON.stringify({
-        version: 1,
-        cart: {
-          id: cart.id
-        },
-        paymentState: "Pending",
-        shipmentState: "Pending"
+        body: JSON.stringify(toSend)
       });
+      const data = await res.json();
+      this.placeOrder(data);
+    },
 
-      var requestOptions = {
+    async placeOrder(cart) {
+      const res = await fetch(`http://localhost:8888/api/placeOrder`, {
         method: "POST",
-        headers: myHeaders,
-        body: raw,
-        redirect: "follow"
-      };
-
-      fetch(
-        "https://api.us-central1.gcp.commercetools.com/nuxt-products/orders",
-        requestOptions
-      ).catch(error => console.log("error", error));
+        body: JSON.stringify(cart)
+      });
+      const data = await res.json();
     }
   }
 };
