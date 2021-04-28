@@ -19,5 +19,10 @@ export const mutations = {
     state.cart[key] = item;
     state.cart[key].quantity = 1;
     state.cart.size += 1;
+  },
+  clearCart(state, key) {
+    state.cart = {
+      size: 0
+    };
   }
 };

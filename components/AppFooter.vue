@@ -17,7 +17,14 @@ export default {
 footer span {
   display: block;
   text-align: center;
-  margin: 70px 0 15px;
+  margin: 70px 40px 15px;
   font-size: 0.95rem;
+}
+
+@media screen and (max-width: 720px) {
+  footer span {
+    margin: 40px 40px 15px;
+    font-size: 0.8rem;
+  }
 }
 </style>

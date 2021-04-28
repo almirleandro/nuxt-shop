@@ -41,6 +41,11 @@
       </select>
       <span class="total-checkout">Total: ${{ total }}</span>
       <button class="order-btn">Place Order</button>
+      <transition name="default">
+        <span v-show="displaySentMessage" class="sentMessage"
+          >Order submitted. Come back soon!</span
+        >
+      </transition>
     </form>
   </div>
 </template>
@@ -59,7 +64,8 @@ export default {
       postcode: "",
       city: "",
       adress: "",
-      payment: "PayPal"
+      payment: "PayPal",
+      displaySentMessage: false
     };
   },
   computed: {
@@ -138,7 +144,16 @@ export default {
           body: JSON.stringify(cart)
         }
       );
-      const data = await res.json();
+
+      this.firstName = "";
+      this.lastName = "";
+      this.phone = "";
+      this.email = "";
+      this.postcode = "";
+      this.city = "";
+      this.adress = "";
+      this.displaySentMessage = true;
+      this.$store.commit("clearCart");
     }
   }
 };
@@ -156,6 +171,7 @@ export default {
   width: 550px;
   display: flex;
   flex-direction: column;
+  margin: 0 62px;
 }
 
 .billing input,
@@ -201,6 +217,12 @@ export default {
   color: white;
 }
 
+.sentMessage {
+  margin-top: 20px;
+  text-align: right;
+  color: rgb(0, 81, 255);
+}
+
 .default-enter-active,
 .default-leave-active {
   transition: opacity 0.5s;
@@ -208,5 +230,11 @@ export default {
 .default-enter,
 .default-leave-active {
   opacity: 0;
+}
+
+@media screen and (max-width: 680px) {
+  .input-block input {
+    width: 100%;
+  }
 }
 </style>

@@ -12,7 +12,10 @@
           <div class="item-img">
             <img :src="item.masterVariant.images[0].url" :key="item.name.en" />
           </div>
-          <span>{{ item.name.en }}</span>
+          <span class="item-label description-label">Description: </span>
+          <span class="item-name">{{ item.name.en }}</span>
+          <div class="blank-div"></div>
+          <span class="item-label quantity-label">Quantity: </span>
           <div class="quantity-div">
             <button
               class="quantity-btn"
@@ -28,7 +31,9 @@
               >
             </button>
           </div>
-          <span
+          <div class="blank-div"></div>
+          <span class="item-label price-label">Price: </span>
+          <span class="item-price"
             >${{
               rightPrice(
                 item.masterVariant.prices[0].value.centAmount / 100,
@@ -100,7 +105,7 @@ export default {
   width: 680px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 100px;
+  margin: 0 40px 100px;
 }
 
 .top-row {
@@ -136,6 +141,10 @@ export default {
 .item-content span,
 .quantity-div {
   align-self: center;
+}
+
+.item-label {
+  display: none;
 }
 
 .quantity-btn {
@@ -174,6 +183,10 @@ export default {
   height: fit-content;
 }
 
+.blank-div {
+  display: none;
+}
+
 .default-enter-active,
 .default-leave-active {
   transition: opacity 0.5s;
@@ -181,5 +194,89 @@ export default {
 .default-enter,
 .default-leave-active {
   opacity: 0;
+}
+
+@media screen and (max-width: 820px) {
+  .item-content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+    grid-template-rows: repeat(6, 1fr);
+    padding: 10px 0;
+    border-bottom: 3px rgb(231, 231, 231) solid;
+  }
+
+  .item-img {
+    min-width: 100%;
+    max-height: 100%;
+    padding-right: 30px;
+    grid-column: 1 / 2;
+    grid-row: 1 / 7;
+  }
+
+  .item-label {
+    display: block;
+    margin-top: 15px;
+    padding-left: 10px;
+    text-align: center;
+  }
+
+  .top-row {
+    display: none;
+  }
+
+  .content-rows {
+    border-top: 3px rgb(231, 231, 231) solid;
+  }
+
+  .item-name,
+  .quantity-div,
+  .item-price {
+    margin-bottom: 15px;
+    padding-left: 10px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .item-content {
+    grid-template-columns: 0.8fr 1fr;
+    grid-template-rows: repeat(4, 1fr) repeat(2, 0.5fr);
+  }
+
+  .description-label {
+    grid-column: 1 / 2;
+    grid-row: 5 / 6;
+    text-align: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .item-name {
+    grid-column: 1 / 2;
+    grid-row: 6 / 7;
+    text-align: left;
+    padding-bottom: 5px;
+  }
+
+  .item-img {
+    grid-column: 1 / 2;
+    grid-row: 1 / 5;
+    padding: 0;
+  }
+
+  .item-name,
+  .item-label {
+    margin: 0px;
+  }
+
+  .blank-div {
+    display: block;
+  }
+
+  .quantity-label,
+  .price-label {
+    margin-top: 15px;
+  }
 }
 </style>

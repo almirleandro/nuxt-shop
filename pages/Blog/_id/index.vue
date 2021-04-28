@@ -45,7 +45,7 @@ export default {
 
 <style>
 .post-container {
-  padding-top: 50px;
+  padding: 50px 70px 0;
   display: flex;
   justify-content: center;
   min-height: 90vh;
@@ -81,5 +81,15 @@ export default {
 .default-enter,
 .default-leave-active {
   opacity: 0;
+}
+
+@media screen and (max-width: 590px) {
+  .post-container {
+    padding: 50px 50px 0;
+  }
+
+  .post h1 {
+    font-size: 2rem;
+  }
 }
 </style>

@@ -162,4 +162,26 @@ export default {
 .default-leave-active {
   opacity: 0;
 }
+
+@media screen and (max-width: 970px) {
+  .products-div {
+    width: 100%;
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+    grid-gap: 20px;
+  }
+}
+
+@media screen and (max-width: 590px) {
+  .section {
+    padding: 50px 70px 0;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .section {
+    padding: 50px 50px 0;
+  }
+}
 </style>

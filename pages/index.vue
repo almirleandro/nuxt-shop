@@ -169,4 +169,46 @@ export default {
 .default-leave-active {
   opacity: 0;
 }
+
+@media screen and (max-width: 880px) {
+  .container {
+    padding: 20px 70px 0;
+    min-height: 90vh;
+  }
+
+  .first-row,
+  .second-row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .image-block-div {
+    transform-origin: bottom;
+  }
+}
+
+@media screen and (max-width: 590px) {
+  .container {
+    padding: 50px 50px 0;
+  }
+
+  .section-title-div {
+    height: 50px;
+    margin-top: -80px;
+  }
+
+  @media screen and (max-width: 460px) {
+    .section-title-div {
+      height: 40px;
+      margin-top: -60px;
+      font-size: 1rem;
+    }
+  }
+
+  @media screen and (max-width: 410px) {
+    .section-title-div {
+      height: 30px;
+    }
+  }
+}
 </style>
