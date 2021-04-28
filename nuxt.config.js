@@ -11,7 +11,11 @@ export default {
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "" }
+      {
+        hid: "description",
+        name: "description",
+        content: "An e-commerce built with MACH technology"
+      }
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
@@ -26,7 +30,7 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ["@nuxtjs/dotenv"],
+  buildModules: ["@nuxtjs/dotenv", "@nuxtjs/pwa"],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["@nuxtjs/apollo"],
@@ -65,6 +69,14 @@ export default {
         "/blog/6b880c0f-c3e2-4c14-a8bd-f22b61630992",
         "/blog/b89856bc-b173-4dba-ae61-e7b3311ad079"
       ];
+    }
+  },
+
+  pwa: {
+    manifest: {
+      name: "Nuxt Shop",
+      lang: "en",
+      short_name: "Nuxt Shop"
     }
   }
 };

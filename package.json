@@ -19,6 +19,7 @@
     "nuxt": "^2.15.3"
   },
   "devDependencies": {
-    "@nuxtjs/dotenv": "^1.4.1"
+    "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/pwa": "^3.3.5"
   }
 }
