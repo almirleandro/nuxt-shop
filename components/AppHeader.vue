@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="navbar-wrapper" :class="navbarStickyClass + ' ' + 'sticky'">
     <div class="navbar">
       <div class="logo-div">
         <nuxt-link to="/" class="logo-img">
@@ -51,6 +51,16 @@
         </nuxt-link>
       </div>
     </div>
+    <div class="mobile-cart-div">
+      <nuxt-link to="/cart">
+        <div class="cart-header-div">
+          <span>Cart:</span>
+          <div class="cart-size">
+            {{ size }}
+          </div>
+        </div>
+      </nuxt-link>
+    </div>
   </div>
 </template>
 
@@ -60,7 +70,8 @@ export default {
   data() {
     return {
       quantity: this.$store.state.cart.size,
-      sideNavSize: "0px"
+      sideNavSize: "0px",
+      navbarStickyClass: ""
     };
   },
   computed: {
@@ -211,6 +222,10 @@ export default {
   display: none;
 }
 
+.mobile-cart-div {
+  display: none;
+}
+
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   .sidebar {
@@ -241,6 +256,43 @@ export default {
 
   .cart-size {
     margin-left: 12px;
+  }
+
+  .mobile-cart-div {
+    display: flex;
+    margin-left: 55px;
+    margin-top: -4px;
+  }
+
+  .mobile-cart-div a {
+    text-decoration: none;
+  }
+
+  .mobile-cart-div .cart-header-div:hover span {
+    text-decoration: none;
+  }
+
+  .mobile-cart-div .cart-header-div {
+    width: fit-content;
+    border: 1px solid rgb(201, 201, 201);
+    border-radius: 3px;
+    padding: 5px 5px 5px 8px;
+    text-decoration: none;
+  }
+
+  .mobile-cart-div .cart-size {
+    border: none;
+    margin-left: 8px;
+  }
+
+  /* The sticky class is added to the navbar with JS when it reaches its scroll position */
+  .sticky {
+    background-color: white;
+    padding-bottom: 15px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
   }
 }
 </style>

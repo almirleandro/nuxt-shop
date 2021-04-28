@@ -85,6 +85,7 @@ export default {
 
 @media screen and (max-width: 590px) {
   .post-container {
+    margin-top: 112.6px;
     padding: 50px 50px 0;
   }
 

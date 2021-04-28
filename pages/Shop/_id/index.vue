@@ -176,7 +176,7 @@ export default {
 
 @media screen and (max-width: 590px) {
   .section {
-    padding: 50px 70px 0;
+    padding: 112.6px 70px 0;
   }
 }
 

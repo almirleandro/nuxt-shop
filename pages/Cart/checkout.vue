@@ -237,4 +237,10 @@ export default {
     width: 100%;
   }
 }
+
+@media screen and (max-width: 590px) {
+  .checkout-container {
+    margin-top: 112.6px;
+  }
+}
 </style>

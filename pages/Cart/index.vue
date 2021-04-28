@@ -238,6 +238,15 @@ export default {
   }
 }
 
+@media screen and (max-width: 590px) {
+  .cart-container {
+    margin-top: 112.6px;
+    display: flex;
+    justify-content: center;
+    min-height: 90vh;
+  }
+}
+
 @media screen and (max-width: 510px) {
   .item-content {
     grid-template-columns: 0.8fr 1fr;
