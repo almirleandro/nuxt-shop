@@ -137,6 +137,7 @@ export default {
   font-size: 1.2rem;
   cursor: pointer;
   transition: 0.5s; /* Animation */
+  padding: 20px 0;
 }
 
 .add-cart-btn:hover {
