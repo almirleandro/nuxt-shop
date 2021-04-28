@@ -180,6 +180,8 @@ export default {
   .second-row {
     display: flex;
     flex-wrap: wrap;
+    grid-gap: 0;
+    margin-bottom: 0;
   }
 
   .image-block-div {
