@@ -46,13 +46,13 @@ export default {
         httpEndpoint:
           // Development: http://localhost:8888/api/getPost
           // Production: https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getPost
-          "http://localhost:8888/api/getPost"
+          "https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getPost"
       },
       getPosts: {
         httpEndpoint:
           // Development: http://localhost:8888/api/getPosts
           // Production: https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getPosts
-          "http://localhost:8888/api/getPosts"
+          "https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getPosts"
       }
     }
   },
