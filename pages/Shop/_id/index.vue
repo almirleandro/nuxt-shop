@@ -21,6 +21,7 @@
 export default {
   name: "ShopSection",
   transition: "default",
+
   data() {
     return {
       products: [],
@@ -28,11 +29,14 @@ export default {
       section: ""
     };
   },
+
   computed: {
+    // Enable transition effect
     loadPage() {
       return this.products?.length;
     }
   },
+
   methods: {
     addToCart(item) {
       const key = item.name.en.split(" ").join("");
@@ -45,40 +49,50 @@ export default {
       }
     }
   },
-  async fetch() {
-    let route = "";
-    switch (this.$route.params.id) {
-      case "jackets":
-        route = "1503b845-3b2d-4469-aea3-2c8a4a54ec82";
-        break;
-      case "hats":
-        route = "ffcc633b-0e55-4577-8a43-015f224debc8";
-        break;
-      case "sneakers":
-        route = "25899254-051d-4372-acb1-25b7afd0f3be";
-        break;
-      case "womens":
-        route = "e82cf5a0-5583-4c1d-a6a0-f3e39bf2c364";
-        break;
-      case "mens":
-        route = "9f69d878-e50a-4eb1-aebf-6bd9f8b4d166";
-        break;
-    }
 
-    // Development: http://localhost:8888/api/getProducts
-    // Production: https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getProducts
-    const res = await fetch(
-      `https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getProducts`,
-      {
-        method: "POST",
-        body: route
+  // Get array of production of the chosen category
+  async fetch() {
+    try {
+      // Transform category name to the category ID in the database
+      let route = "";
+      switch (this.$route.params.id) {
+        case "jackets":
+          route = "1503b845-3b2d-4469-aea3-2c8a4a54ec82";
+          break;
+        case "hats":
+          route = "ffcc633b-0e55-4577-8a43-015f224debc8";
+          break;
+        case "sneakers":
+          route = "25899254-051d-4372-acb1-25b7afd0f3be";
+          break;
+        case "womens":
+          route = "e82cf5a0-5583-4c1d-a6a0-f3e39bf2c364";
+          break;
+        case "mens":
+          route = "9f69d878-e50a-4eb1-aebf-6bd9f8b4d166";
+          break;
       }
-    );
-    const data = await res.json();
-    this.products = data;
-    this.section =
-      this.$route.params.id.charAt(0).toUpperCase() +
-      this.$route.params.id.slice(1);
+
+      // Development: http://localhost:8888/api/getProducts
+      // Production: https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getProducts
+      const res = await fetch(
+        `https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getProducts`,
+        {
+          method: "POST",
+          body: route
+        }
+      );
+      const data = await res.json();
+      this.products = data;
+
+      // Uppercase first letter of the section title
+      this.section =
+        this.$route.params.id.charAt(0).toUpperCase() +
+        this.$route.params.id.slice(1);
+    } catch (error) {
+      // Handle error
+      console.log("error trying to fetch section data");
+    }
   }
 };
 </script>

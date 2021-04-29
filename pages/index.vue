@@ -47,17 +47,21 @@
 export default {
   name: "Homepage",
   transition: "default",
+
   data() {
     return {
       sections: []
     };
   },
+
   computed: {
+    // Enable transition effect
     canLoad() {
       if (!this.sections?.length) return false;
       return true;
     }
   },
+
   methods: {
     isUpperRow(item) {
       const bool = item !== "womens" && item !== "mens";
@@ -68,14 +72,21 @@ export default {
       return bool;
     }
   },
+
+  // Get array of categories from database
   async fetch() {
-    // Development: http://localhost:8888/api/getSections
-    // Production: https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getSections
-    const res = await fetch(
-      `https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getSections`
-    );
-    const data = await res.json();
-    this.sections = data;
+    try {
+      // Development: http://localhost:8888/api/getSections
+      // Production: https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getSections
+      const res = await fetch(
+        `https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getSections`
+      );
+      const data = await res.json();
+      this.sections = data;
+    } catch (error) {
+      // Handle error
+      console.log("Error trying to fetch homepage data");
+    }
   }
 };
 </script>

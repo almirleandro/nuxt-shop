@@ -86,74 +86,82 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      let customLineItems = [];
+      try {
+        let customLineItems = [];
 
-      for (let item in this.cart) {
-        if (this.cart[item].quantity) {
-          const lineObject = {
-            quantity: this.cart[item].quantity,
-            slug: this.cart[item].name.en.split(" ").join(""),
-            name: {
-              en: this.cart[item].name.en
-            },
-            money: {
-              currencyCode: "USD",
-              centAmount: this.cart[item].masterVariant.prices[0].value
-                .centAmount
-            },
-            taxCategory: {
-              id: "a91a4501-ff7c-4eb9-a1f4-4da70c7c7b0a"
-            }
-          };
+        for (let item in this.cart) {
+          if (this.cart[item].quantity) {
+            const lineObject = {
+              quantity: this.cart[item].quantity,
+              slug: this.cart[item].name.en.split(" ").join(""),
+              name: {
+                en: this.cart[item].name.en
+              },
+              money: {
+                currencyCode: "USD",
+                centAmount: this.cart[item].masterVariant.prices[0].value
+                  .centAmount
+              },
+              taxCategory: {
+                id: "a91a4501-ff7c-4eb9-a1f4-4da70c7c7b0a"
+              }
+            };
 
-          customLineItems.push(lineObject);
+            customLineItems.push(lineObject);
+          }
         }
+
+        const toSend = {
+          currency: "USD",
+          customLineItems,
+          customerEmail: this.email,
+          shippingAddress: {
+            country: "BR",
+            firstName: this.firstName,
+            lastName: this.lastName,
+            city: this.city,
+            postalCode: this.postcode,
+            phone: this.phone,
+            email: this.email
+          }
+        };
+
+        const res = await fetch(
+          `https://nuxt-ecommerce-template.netlify.app/.netlify/functions/createCart`,
+          {
+            method: "POST",
+            body: JSON.stringify(toSend)
+          }
+        );
+        const data = await res.json();
+        this.placeOrder(data);
+      } catch (error) {
+        console.log("Error trying to create cart");
       }
-
-      const toSend = {
-        currency: "USD",
-        customLineItems,
-        customerEmail: this.email,
-        shippingAddress: {
-          country: "BR",
-          firstName: this.firstName,
-          lastName: this.lastName,
-          city: this.city,
-          postalCode: this.postcode,
-          phone: this.phone,
-          email: this.email
-        }
-      };
-
-      const res = await fetch(
-        `https://nuxt-ecommerce-template.netlify.app/.netlify/functions/createCart`,
-        {
-          method: "POST",
-          body: JSON.stringify(toSend)
-        }
-      );
-      const data = await res.json();
-      this.placeOrder(data);
     },
 
     async placeOrder(cart) {
-      const res = await fetch(
-        `https://nuxt-ecommerce-template.netlify.app/.netlify/functions/placeOrder`,
-        {
-          method: "POST",
-          body: JSON.stringify(cart)
-        }
-      );
+      try {
+        await fetch(
+          `https://nuxt-ecommerce-template.netlify.app/.netlify/functions/placeOrder`,
+          {
+            method: "POST",
+            body: JSON.stringify(cart)
+          }
+        );
 
-      this.firstName = "";
-      this.lastName = "";
-      this.phone = "";
-      this.email = "";
-      this.postcode = "";
-      this.city = "";
-      this.adress = "";
-      this.displaySentMessage = true;
-      this.$store.commit("clearCart");
+        this.firstName = "";
+        this.lastName = "";
+        this.phone = "";
+        this.email = "";
+        this.postcode = "";
+        this.city = "";
+        this.adress = "";
+        this.displaySentMessage = true;
+        this.$store.commit("clearCart");
+      } catch (error) {
+        console.log("Error trying to create order");
+      }
     }
   }
 };

@@ -38,6 +38,7 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
+  // Apollo Configuration
   apollo: {
     includeNodeModules: true, // optional, default: false (this includes graphql-tag for node_modules folder)
     clientConfigs: {
@@ -45,18 +46,20 @@ export default {
         httpEndpoint:
           // Development: http://localhost:8888/api/getPost
           // Production: https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getPost
-          "https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getPost"
+          "http://localhost:8888/api/getPost"
       },
       getPosts: {
         httpEndpoint:
           // Development: http://localhost:8888/api/getPosts
           // Production: https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getPosts
-          "https://nuxt-ecommerce-template.netlify.app/.netlify/functions/getPosts"
+          "http://localhost:8888/api/getPosts"
       }
     }
   },
 
+  // Dynamic routes to be generated at build time
   generate: {
+    // A better way to generate dynamic routes is to fetch the routes' endpoint here using Axios instead of writing each one
     async routes() {
       return [
         "/shop/hats",
@@ -72,6 +75,7 @@ export default {
     }
   },
 
+  // PWA Configuration
   pwa: {
     manifest: {
       name: "Nuxt Shop",
